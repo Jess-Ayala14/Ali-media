@@ -1,0 +1,14 @@
+{
+  "resourceName": "ImageStorege",
+  "policyUUID": "d18088da",
+  "bucketName": "reactamplifyworks3feb",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
