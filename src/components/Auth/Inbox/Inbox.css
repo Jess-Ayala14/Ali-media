@@ -1,0 +1,81 @@
+.center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+div.Inbox {
+    height: 100vh;
+    background-color: azure;
+}
+
+/*div.Inbox .messages .nav-item .nav-link {
+    color: #c9cfd9;
+    background-color: white;
+    border-radius: 3px;
+    border-color: #c9cfd9;
+   
+}*/
+
+
+div.Inbox .messages .nav-item a.nav-link {
+    color: #a2a8b2;
+    background-color: white;
+    border-radius: 3px;
+    border-color: #c9cfd9;
+    border-style: ridge;
+    padding: 3px;
+    margin-bottom: 3px;
+
+}
+
+.Inbox .nav-item a.nav-link {
+    color: #a2a8b2;
+    background-color: white;
+    border-radius: 3px;
+    border-color: #c9cfd9;
+    border-style: ridge;
+    margin-bottom: 5px;
+
+}
+
+.Inbox .nav-item a.nav-link.active {
+    color: white;
+    background-color: #5f9af1;
+}
+
+.Inbox .Inbox-col-tab .messages-content {
+    height: 80vh;
+    background-color: #f6f8fa;
+    border-radius: 5px;
+    border-color: #85b2f5;
+    border-style: ridge;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.Inbox .Inbox-col-tab .messages-content .fade.tab-pane{
+    display: none;
+}
+
+.Inbox .Inbox-col-tab .messages-content .fade.tab-pane.show{
+    display: inline;
+}

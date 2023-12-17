@@ -1,15 +1,15 @@
 {
-  "dev": {
+  "master": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-reactamplifywork-dev-222212-authRole",
-      "UnauthRoleArn": "arn:aws:iam::169186432930:role/amplify-reactamplifywork-dev-222212-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::169186432930:role/amplify-reactamplifywork-dev-222212-authRole",
+      "AuthRoleName": "amplify-reactaws-master-142445-authRole",
+      "UnauthRoleArn": "arn:aws:iam::169186432930:role/amplify-reactaws-master-142445-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::169186432930:role/amplify-reactaws-master-142445-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-reactamplifywork-dev-222212-deployment",
-      "UnauthRoleName": "amplify-reactamplifywork-dev-222212-unauthRole",
-      "StackName": "amplify-reactamplifywork-dev-222212",
-      "StackId": "arn:aws:cloudformation:us-east-1:169186432930:stack/amplify-reactamplifywork-dev-222212/35277110-a411-11ed-b4f6-129d01248363",
-      "AmplifyAppId": "d2igvaykub0c5k"
+      "DeploymentBucketName": "amplify-reactaws-master-142445-deployment",
+      "UnauthRoleName": "amplify-reactaws-master-142445-unauthRole",
+      "StackName": "amplify-reactaws-master-142445",
+      "StackId": "arn:aws:cloudformation:us-east-1:169186432930:stack/amplify-reactaws-master-142445/b20c2590-9b55-11ee-b6d1-0aa270bdd157",
+      "AmplifyAppId": "d7kqn3faqss19"
     },
     "categories": {
       "auth": {
