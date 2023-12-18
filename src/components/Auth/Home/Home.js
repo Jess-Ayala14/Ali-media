@@ -1,9 +1,9 @@
-import React, { createElement, useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Files from './Partials/Files';
 import Posted from './Partials/Posted';
 import Drafts from './Partials/Drafts';
 import { Auth, API, Storage } from 'aws-amplify';
-import { AmplifyLoadingSpinner } from '@aws-amplify/ui-react';
+import { Loader } from '@aws-amplify/ui-react';
 import { Container, Row, Col, Tab, Button, Modal, Nav, Form, Card, Pagination }
     from 'react-bootstrap';
 import './Home.css';
@@ -15,6 +15,9 @@ import NewPost from './Partials/NewPost';
 import ModalPost from './Partials/ModalPost';
 import ModalLoading from './Partials/ModalLoading';
 import loadimg from '../../../storage/loader.gif';
+import "@aws-amplify/ui-react/styles.css";
+
+
 const store = createStore();
 store.setState("token", '');
 
@@ -292,7 +295,7 @@ const Home = () => {
             return false
     }
 
-    if (!state) return <AmplifyLoadingSpinner />
+    if (!state) return <Loader />
 
     return (
         <div className='Home' >

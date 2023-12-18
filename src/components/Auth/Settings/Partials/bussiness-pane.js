@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Auth, API, Storage } from 'aws-amplify';
-import { AmplifyLoadingSpinner } from '@aws-amplify/ui-react';
+import { Loader } from '@aws-amplify/ui-react';
 import { Container, Row, Col, Tab, Card, Button, Form, Modal }
     from 'react-bootstrap';
 import { listBusinesses } from '../../../../graphql/queries';
@@ -210,7 +210,7 @@ const Bussiness = (props) => {
 
     let [state, setState] = useState(null)
 
-    if (!state) return <AmplifyLoadingSpinner />
+    if (!state) return <Loader />
 
     return (
         <Tab.Pane eventKey="business">

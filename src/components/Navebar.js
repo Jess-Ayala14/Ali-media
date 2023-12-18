@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { AmplifySignOut } from '@aws-amplify/ui-react'
+import { signOut } from '@aws-amplify/auth'
 import { Auth } from 'aws-amplify';
-import { Navbar, Container, Nav, NavDropdown, Col }
+import { Navbar, Container, Nav, NavDropdown, Col, Button }
     from 'react-bootstrap';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
@@ -21,12 +21,13 @@ export default class Navebar extends Component {
 
     }
 
+
     render() {
 
         return (
             <Navbar className='Ali-navbar' bg="primary" variant="dark" expand="lg">
                 <Container>
-                    {!this.props.auth.isAuthenticated  && (
+                    {!this.props.auth.isAuthenticated && (
                         <Navbar.Brand href="/"><img src={logo_site} /></Navbar.Brand>
                     )}
                     {this.props.auth.isAuthenticated && (
@@ -65,13 +66,12 @@ export default class Navebar extends Component {
                                         <NavDropdown.Item href="/Settings">Settings</NavDropdown.Item>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item >
-
-                                            <AmplifySignOut />
-
+                                            <Button onClick={this.handleLogOut}>
+                                                Sing Out
+                                            </Button>
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                 </Col>
-
                             )}
                         </Nav>
                     </Navbar.Collapse>

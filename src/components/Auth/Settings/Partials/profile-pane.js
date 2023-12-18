@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
-import { AmplifyLoadingSpinner } from '@aws-amplify/ui-react';
+import { Loader } from '@aws-amplify/ui-react';
 import { Container, Row, Col, ListGroup, Tab, Form, Button, Alert }
     from 'react-bootstrap';
 
@@ -80,7 +80,7 @@ const Profile = () => {
     }
 
 
-    if (!state) return <AmplifyLoadingSpinner />
+    if (!state) return <Loader />
 
     return (
         <Tab.Pane eventKey="User">
