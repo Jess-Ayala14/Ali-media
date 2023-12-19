@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react'
-//import TwitterLogin from "react-twitter-login";
+import React, { useState } from 'react'
 import { Container, Row, Col, Tab, Button, Modal }
     from 'react-bootstrap';
 import fb_ins_logo from '../../../../storage/fb-ins.png';
-import tw_logo from '../../../../storage/twitter.png';
-//import { Client } from "twitter-api-sdk";
 
 
 const Socialn = (props) => {
@@ -13,32 +10,9 @@ const Socialn = (props) => {
     const logoutFB = props.data[1];
     const onLoginFB = props.data[2];
     const [show, setShow] = useState(false);
-    const [show1, setShow1] = useState(false);
     const handleShow = () => setShow(true);
-    const handleShow1 = () => setShow1(true);
     const handleClose = () => setShow(false);
-    const handleClose1 = () => setShow1(false);
     
-
-    //const client = new Client(process.env.BEARER_TOKEN);
-
-
-    const authHandler = (err, data) => {
-        console.log(err, data);
-    };
-
-    // Instantiate with desired auth type (here's Bearer v2 auth)
-    /*
-    async function main() {
-        const stream = client.tweets.sampleStream({
-            "tweet.fields": ["author_id"],
-        });
-        for await (const tweet of stream) {
-            console.log(tweet.data?.author_id);
-        }
-    }
-    */
-
     return (
         <Tab.Pane eventKey="Social">
             {console.log(loginFB)}
@@ -46,7 +20,7 @@ const Socialn = (props) => {
                 <div className='socialn-list'>
                     <Row className="justify-content-md-center">
                         <Col className='text-center'>
-                            <img src={fb_ins_logo} />
+                            <img src={fb_ins_logo} alt='logo face-insta' />
                             <br />
                             <Row>
                                 <Col className='text-center'>
@@ -68,12 +42,6 @@ const Socialn = (props) => {
                             </Row>
 
                         </Col>
-                        {/*
-                        <Col className='text-center'>
-                            <img src={tw_logo} />
-                            <br />
-                            <Button variant="primary" onClick={handleShow1}>Pair</Button>
-                        </Col>*/}
                     </Row>
                 </div>
             </Container>
@@ -103,29 +71,7 @@ const Socialn = (props) => {
 
                 </Modal.Footer>
             </Modal>
-            {/*
-            <Modal show={show1} onHide={handleClose1}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Twitter Authorization</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <h4>Modal for twitter</h4>
-
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose1}>
-                        Close
-                    </Button>
-                    <Button>
-                        Login
-                    </Button>
-                </Modal.Footer>
-                    </Modal>*/}
-
         </Tab.Pane>
-
-
     )
 }
 

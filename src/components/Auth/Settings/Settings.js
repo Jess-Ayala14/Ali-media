@@ -6,7 +6,7 @@ import { withAuthenticator } from '@aws-amplify/ui-react'
 import { Container, Row, Col, Tab, Nav}
   from 'react-bootstrap';
 import './Settings.css';
-import { async } from 'rxjs';
+
 
 
 function Settings() {
@@ -59,12 +59,13 @@ function Settings() {
 
   }
 
+  /*
   async function checkLoginStateFB() {
     window.FB.getLoginStatus(function (response) {
       statusChangeCallbackFB(response);
     });
 
-  }
+  }*/
 
   const statusChangeCallbackFB = (response) => {
     if (response.status === 'connected') {
