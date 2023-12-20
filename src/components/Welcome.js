@@ -26,7 +26,7 @@ class Welcome extends Component {
             <Col xs={8} md={6} lg={4} className="center">
               <h3 className="title-welcome">Welcome to Ali-Media</h3>
               <br />
-              <img src={logo_site} alt="Logo" />
+              <img src={logo_site} />
               <br />
               <Card className='card-welcome'>
                 <Card.Body className='center'>

@@ -7,8 +7,6 @@ import { Container, Row, Col, Tab, Nav}
   from 'react-bootstrap';
 import './Settings.css';
 
-
-
 function Settings() {
 
   const [loginFB, setloginFB] = useState(false);
@@ -59,13 +57,12 @@ function Settings() {
 
   }
 
-  /*
   async function checkLoginStateFB() {
     window.FB.getLoginStatus(function (response) {
       statusChangeCallbackFB(response);
     });
 
-  }*/
+  }
 
   const statusChangeCallbackFB = (response) => {
     if (response.status === 'connected') {

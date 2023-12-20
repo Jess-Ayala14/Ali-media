@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { signOut } from '@aws-amplify/auth'
 import { Auth } from 'aws-amplify';
 import { Navbar, Container, Nav, NavDropdown, Col, Button }
     from 'react-bootstrap';
@@ -27,10 +28,10 @@ export default class Navebar extends Component {
             <Navbar className='Ali-navbar' bg="primary" variant="dark" expand="lg">
                 <Container>
                     {!this.props.auth.isAuthenticated && (
-                        <Navbar.Brand href="/"><img src={logo_site} alt='logo' /></Navbar.Brand>
+                        <Navbar.Brand href="/"><img src={logo_site} /></Navbar.Brand>
                     )}
                     {this.props.auth.isAuthenticated && (
-                        <Navbar.Brand href="/Signup"><img src={logo_site} alt='logo' /></Navbar.Brand>
+                        <Navbar.Brand href="/Signup"><img src={logo_site} /></Navbar.Brand>
                     )}
                     <Navbar.Toggle />
                     <Navbar.Collapse id="basic-navbar-nav navbarScroll" >

@@ -8,8 +8,6 @@ import {
     createBusiness as createBusinessMutation,
     updateBusiness as updateBusinessMutation
 } from '../../../../graphql/mutations';
-import { async } from 'rxjs';
-
 
 const initialFormState = { name: '', about: '', image: '', phone: '' }
 const updateFormState = { profile: '' }
