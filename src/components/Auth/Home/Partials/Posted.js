@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Tab, Offcanvas, Nav, Row, Col, Card, Button, Container, Modal } from 'react-bootstrap';
 import ModalDelPost from './ModalDelPost';
+import { async } from 'rxjs';
 import { createStore } from 'state-pool';
 
 const store = createStore();

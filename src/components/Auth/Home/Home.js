@@ -144,7 +144,7 @@ const Home = () => {
                 appId: "801174264382809",
                 cookie: true,
                 xfbml: true,
-                version: 'v15.0'
+                version: 'v18.0'
             });
 
             window.FB.getLoginStatus(function (response) {

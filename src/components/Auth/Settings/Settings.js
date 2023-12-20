@@ -7,6 +7,7 @@ import { Container, Row, Col, Tab, Nav}
   from 'react-bootstrap';
 import './Settings.css';
 
+
 function Settings() {
 
   const [loginFB, setloginFB] = useState(false);
@@ -37,7 +38,7 @@ function Settings() {
         appId: "801174264382809",
         cookie: true,
         xfbml: true,
-        version: 'v14.0'
+        version: 'v18.0'
       });
 
       window.FB.getLoginStatus(function (response) {

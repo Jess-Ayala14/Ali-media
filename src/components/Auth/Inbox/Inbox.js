@@ -6,6 +6,7 @@ import { Container, Row, Tab }
 import { createStore } from 'state-pool';
 import './Inbox.css'
 
+
 const store = createStore();
 store.setState("token", '');
 
@@ -58,7 +59,7 @@ const Inbox = () => {
                 appId: "801174264382809",
                 cookie: true,
                 xfbml: true,
-                version: 'v15.0'
+                version: 'v18.0'
             });
 
             window.FB.getLoginStatus(function (response) {
