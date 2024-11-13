@@ -166,8 +166,8 @@ export const Posted = (data) => {
 
         const listItems = FBposted.map((post) =>
             <Row>
-                <Col xs={0} sm={2} md={2} lg={2} />
-                <Col xs={12} sm={8} md={8} lg={8}>
+                <Col xs={0} sm={1} md={2} lg={2} />
+                <Col xs={12} sm={10} md={8} lg={8}>
                     <br />
                     <Card>
                         <Card.Title className='text-left'><a href={'https://www.facebook.com/' + post[0]} target="_blank">Go to post</a></Card.Title>
@@ -190,7 +190,7 @@ export const Posted = (data) => {
                         </Card.Footer>
                     </Card>
                 </Col>
-                <Col xs={0} sm={2} md={2} lg={2} />
+                <Col xs={0} sm={1} md={2} lg={2} />
             </Row>
         );
 

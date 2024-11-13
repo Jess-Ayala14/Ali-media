@@ -131,10 +131,11 @@ export const InsightsInst = (data) => {
             {loginFB == true
                 ?
                 <Row>
+                    <Col xs={1} md={2} lg={4}/>
                     <Col xs={10} md={8} lg={4}>
                         <GetAnalyticsInst analytics={analyticsInst} />
                     </Col>
-                    <Col xs={1} md={4} lg={8} />
+                    <Col xs={1} md={2} lg={4} />
                 </Row>
                 :
                 <Row className="card-insight">

@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import InsightsFB from './Partials/InsightsFB';
 import InsightsInst from './Partials/InsightsInst';
-import { Container, Row, Tab, Nav }
+import { Container, Row, Tab, Nav, Col }
     from 'react-bootstrap';
 import { createStore } from 'state-pool';
 import './Analytics.css'
@@ -116,27 +116,31 @@ const Analytics = () => {
             <Container>
                 <br />
                 <Row className='Insights'>
-                    <Tab.Container defaultActiveKey="facebook-insight">
-                        <Nav variant="pills" defaultActiveKey="facebook-insight">
-                            <Nav.Item>
-                                <Nav.Link className='facebook' eventKey="facebook-insight">Facebook</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link className='instagram' eventKey="instagram-insight">Instagram</Nav.Link>
-                            </Nav.Item>
-                        </Nav>
-                        <div className='socialM-content'>
-                            <Tab.Content>
-                                <Tab.Pane eventKey="facebook-insight">
-                                    <InsightsFB dataFromParent={[loginFB, access_token]} />
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="instagram-insight">
-                                    <InsightsInst dataFromParent={[loginFB, access_token]} />
-                                </Tab.Pane>
-                            </Tab.Content>
-                        </div>
-                    </Tab.Container>
+                    <Col xs={1} />
+                    <Col xs={10}>
+                        <Tab.Container defaultActiveKey="facebook-insight">
+                            <Nav variant="pills" defaultActiveKey="facebook-insight">
+                                <Nav.Item>
+                                    <Nav.Link className='facebook' eventKey="facebook-insight">Facebook</Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link className='instagram' eventKey="instagram-insight">Instagram</Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                            <div className='socialM-content'>
+                                <Tab.Content>
+                                    <Tab.Pane eventKey="facebook-insight">
+                                        <InsightsFB dataFromParent={[loginFB, access_token]} />
+                                    </Tab.Pane>
+                                    <Tab.Pane eventKey="instagram-insight">
+                                        <InsightsInst dataFromParent={[loginFB, access_token]} />
+                                    </Tab.Pane>
+                                </Tab.Content>
+                            </div>
 
+                        </Tab.Container>
+                    </Col>
+                    <Col xs={1} />
                 </Row>
             </Container>
 

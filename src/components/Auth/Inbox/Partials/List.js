@@ -1,17 +1,22 @@
-import React, { useEffect } from 'react';
-import { Container, Row, Col, Tab, Nav, Button, Card }
+import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Tab, Nav, Button, Card, Form, InputGroup }
     from 'react-bootstrap';
 
 import { createStore } from 'state-pool';
 const store = createStore();
 
 store.setState("Conversations", [null]);
+store.setState("BusinessId", [null]);
+
+//const initialMessageState = { text: '' };
 
 export const List = (data) => {
     const loginFB = data['dataFromParent'][0];
     const ACCESS_TOKEN = data['dataFromParent'][1];
-    const APICALLFB = "me?fields=conversations{id,messages{message,from},participants}";
+    const APICALLFB = "me?fields=conversations{id,messages{message,from},participants},business";
     const [Conversations, setConversations] = store.useState("Conversations");
+    const [BusinessId, setBusinessId] = store.useState("BusinessId");
+    //const [sendMessage,setFormData]=useState(initialMessageState);
 
     useEffect(() => {
         if (loginFB !== false) {
@@ -32,6 +37,7 @@ export const List = (data) => {
                 // Insert your code here
                 //console.log(response);
                 setConversations(format(getConversation(response)));
+                console.log(setBusinessId(getBusinessId(response)));
             }
 
         );
@@ -57,38 +63,103 @@ export const List = (data) => {
 
             return filtered;
         }
+
+        function getBusinessId(response) {
+            var id = response['business']['id']
+            return id;
+        }
+
+
     }
 
-    function GetConversations(props) {
-        //console.log(props);
+    function GetConversations() {
+        var listItems;
+        var link;
 
-        const conversations = props.conversations;
-        const listItems = conversations.map((conversation) =>
-            <>{conversation != null &&
-                <Nav.Item>
-                    <Nav.Link className='text-left' eventKey={conversation[0]}><h8>{conversation[2]}</h8></Nav.Link>
-                </Nav.Item>
-            } </>
+        if (!Conversations || !link) {
+            listItems = Conversations.map((conversation) =>
+                <>
+                    {
+                        conversation != null &&
+                        <Nav.Item>
+                            <Nav.Link className='text-left' eventKey={conversation[0]}><h8>{conversation[2]}</h8></Nav.Link>
+                        </Nav.Item>
+                    }
+                </>
 
-        );
+            );
+
+            link =
+                <>
+                    <Nav.Item>
+                        <Nav.Link href={"https://business.facebook.com/latest/inbox/all/?business_id=" + BusinessId} className="text-left" target="_blank" eventKey="main">
+                            Meta for Business
+                        </Nav.Link>
+                    </Nav.Item>
+                </>;
+        }
 
         return (
-            <ul>{listItems}</ul>
+            listItems && link ?
+                <ul>{link}
+                    {listItems}
+                </ul>
+                :
+                <>
+                </>
+
         );
     }
 
-    function TabConversation(props) {
-        console.log(props);
-        const conversations = props.conversations;
-        const listItems = conversations.map((conversation) =>
+    /*  async function onChange(e) {
+        if(!e.target.value.text)return
+        setFormData  
+          
+      }
+     
+      */
+
+    function TabConversation() {
+
+        const listItems = Conversations.map((conversation) =>
             <>{conversation != null &&
                 <Tab.Pane eventKey={conversation[0]}>
                     <Tab.Container className="text-left">
-                        <Container>
-                            {conversation[1].map((key) =>
-                                key['message'] != "" &&
-                                <><b>{key['from']['name'] + ": "}</b><h8>{key['message']}</h8><br /><br /></>
-                            ).reverse()}
+                        <Container className='container-message'>
+                            <Row className='row-80'>
+                                {conversation[1].map((key) =>
+                                    key['message'] != "" &&
+                                    <Card>
+                                        <Card.Body>
+                                            <b>{key['from']['name'] + ": "}</b><h8>{key['message']}</h8>
+                                            <br /><br />
+                                        </Card.Body>
+                                    </Card>
+                                ).reverse()}
+                            </Row>
+                            <Row className='row-20'>
+                                <Card>
+                                    <Card.Body>
+                                        <InputGroup className="mb-3">
+                                            <Form>
+                                                <Form.Control /*
+                                                    placeholder="Write a message"
+                                                    aria-label="Recipient's username"
+                                                    aria-describedby="basic-addon2"
+                                                    onChange={setFormData1({...messageData,'text': e.target.value})}*/
+                                                />
+                                                <Form.Label><i>Available soon</i></Form.Label>
+                                            </Form>
+                                            <Button variant="secondary"
+                                                id="" onClick={() => { /*tryToSend(); */ }}
+                                                title='Available soon'
+                                            >
+                                                Send
+                                            </Button>
+                                        </InputGroup>
+                                    </Card.Body>
+                                </Card>
+                            </Row>
                         </Container>
                     </Tab.Container>
                 </Tab.Pane>
@@ -104,7 +175,9 @@ export const List = (data) => {
                             <Row>
                                 <Col md={2} />
                                 <Col md={8}>
-                                    <h4>No Chat Selected</h4>
+                                    <Row>
+                                        <h4>No Chat Selected</h4>
+                                    </Row>
                                 </Col>
                                 <Col md={2} />
                             </Row>
@@ -121,9 +194,9 @@ export const List = (data) => {
             {loginFB == true
                 ?
                 <>
-                    <Col xs={6} md={3} lg={2}>
+                    <Col xs={3} md={3} lg={2}>
                         <Nav variant="pills" className="flex-column">
-                            <GetConversations conversations={Conversations} />
+                            <GetConversations data={{ conversation: Conversations, business: BusinessId }} />
                         </Nav>
                     </Col>
                     <Col className="Inbox-col-tab" xs={0} sm={9} md={9} lg={8}>
@@ -136,7 +209,7 @@ export const List = (data) => {
                 </>
                 :
                 <>
-                    <Col xs={6} md={3} lg={2} />
+                    <Col xs={7} md={3} lg={2} />
                     <Col className="Inbox-col-tab" xs={0} sm={9} md={9} lg={8}>
                         <Row className='messages-content'>
                             <Row className="card-insight">

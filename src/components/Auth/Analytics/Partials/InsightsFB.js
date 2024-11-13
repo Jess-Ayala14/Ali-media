@@ -13,7 +13,7 @@ export const InsightsFB = (data) => {
 
     const loginFB = data['dataFromParent'][0];
     const ACCESS_TOKEN = data['dataFromParent'][1];
-    const APICALLFB = 'me/insights?metric=page_engaged_users,page_impressions,page_post_engagements,page_posts_impressions'
+    const APICALLFB = 'me/insights?metric=page_impressions,page_post_engagements,page_daily_follows,page_total_actions'
     var [analyticsFB, setAnalytics] = store.useState("analyticsFB");
     const [dayAnlyticsFB, setdayAnalytics] = store.useState("dayAnalytics");
     const [weekAnlyticsFB, setweekAnalytics] = store.useState("weekAnalytics");
@@ -253,12 +253,13 @@ export const InsightsFB = (data) => {
         <>
             {loginFB == true
                 ?
-                    <Row>
-                        <Col xs={10} md={8} lg={4}>
-                            {<GetAnalyticsFB analytics={analyticsFB} />}
-                        </Col>
-                        <Col xs={1} md={4} lg={8} />
-                    </Row>
+                <Row>
+                    <Col xs={1} md={2} lg={4} />
+                    <Col xs={10} md={8} lg={4}>
+                        {<GetAnalyticsFB analytics={analyticsFB} />}
+                    </Col>
+                    <Col xs={1} md={2} lg={4} />
+                </Row>
                 :
                 <Row className="card-insight">
                     <Col xs={1} md={3} lg={4} />

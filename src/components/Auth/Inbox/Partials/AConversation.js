@@ -19,7 +19,7 @@ export const AConversation = (data) => {
 
     }, [ACCESS_TOKEN]);
 
-
+     /*
     function allMessages() {
         window.FB.api(
             ID + APICALLFB,
@@ -53,7 +53,47 @@ export const AConversation = (data) => {
             return content;
 
         };
+    }*/
+
+    function allMessages() {
+    window.FB.api(
+        ID + APICALLFB,
+        "GET",
+        {
+            access_token: ACCESS_TOKEN
+        },
+        function (response) {
+            if (response && !response.error) {
+                // Si no hay errores en la respuesta, procesamos los mensajes
+                setMessages(format(getMessages(response)));
+            } else {
+                // Manejo de errores
+                console.error("Error fetching messages:", response.error);
+                // Aquí podrías manejar el error de diferentes maneras, como mostrar un mensaje en la UI
+            }
+        }
+    );
+
+    function getMessages(response) {
+        // Extraemos los mensajes de la respuesta
+        var messages = response['messages']['data'];
+        return messages;
     }
+
+    function format(messages) {
+        // Formateamos los mensajes para ser mostrados en la UI
+        const content = Object.keys(messages).map(key => {
+            return [
+                messages[key].id, 
+                messages[key].message, 
+                messages[key].from.name
+            ];
+        });
+
+        return content;
+    }
+}
+
 
     function GetMessages(props) {
         console.log(props)

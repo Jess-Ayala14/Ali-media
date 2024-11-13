@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import List from './Partials/List';
-import { Container, Row, Tab }
+import { Container, Row, Col, Tab }
     from 'react-bootstrap';
 import { createStore } from 'state-pool';
 import './Inbox.css'
-
 
 const store = createStore();
 store.setState("token", '');
@@ -59,7 +58,7 @@ const Inbox = () => {
                 appId: "801174264382809",
                 cookie: true,
                 xfbml: true,
-                version: 'v18.0'
+                version: 'v15.0'
             });
 
             window.FB.getLoginStatus(function (response) {
