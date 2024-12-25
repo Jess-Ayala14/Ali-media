@@ -3,7 +3,7 @@ import Bussiness from './Partials/bussiness-pane';
 import Profile from './Partials/profile-pane';
 import Socialn from './Partials/socialn-pane';
 import { withAuthenticator } from '@aws-amplify/ui-react'
-import { Container, Row, Col, Tab, Nav}
+import { Container, Row, Col, Tab, Nav, Button }
   from 'react-bootstrap';
 import './Settings.css';
 
@@ -38,7 +38,7 @@ function Settings() {
         appId: "801174264382809",
         cookie: true,
         xfbml: true,
-        version: 'v18.0'
+        version: 'v14.0'
       });
 
       window.FB.getLoginStatus(function (response) {

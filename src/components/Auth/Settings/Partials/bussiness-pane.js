@@ -9,6 +9,7 @@ import {
     updateBusiness as updateBusinessMutation
 } from '../../../../graphql/mutations';
 
+
 const initialFormState = { name: '', about: '', image: '', phone: '' }
 const updateFormState = { profile: '' }
 

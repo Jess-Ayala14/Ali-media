@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Auth, API, Storage } from 'aws-amplify';
 
 const NewPost = (PostState, access_tk) => {
+
     const newPostData = PostState;
     const access_token = access_tk;
 
@@ -31,11 +32,8 @@ const NewPost = (PostState, access_tk) => {
             }
 
             alert('Post published successfully!');
-            window.location.reload();
-
         } catch (error) {
             alert(`Error: An error occurred while publishing the post: ${error.message}`);
-            window.location.reload();
         }
     }
 
@@ -104,7 +102,7 @@ const NewPost = (PostState, access_tk) => {
 
         const mediaResponse = await new Promise((resolve, reject) => {
             window.FB.api(
-                `${instaIdResponse}/media`,
+                ${instaIdResponse}/media,
                 'POST',
                 mediaParams,
                 (response) => {
@@ -119,7 +117,7 @@ const NewPost = (PostState, access_tk) => {
 
         await new Promise((resolve, reject) => {
             window.FB.api(
-                `${instaIdResponse}/media_publish`,
+                ${instaIdResponse}/media_publish,
                 'POST',
                 { access_token, creation_id: mediaResponse },
                 (response) => {
@@ -137,7 +135,7 @@ const NewPost = (PostState, access_tk) => {
 
     // Helper function to show alerts
     function showAlert(title, message) {
-        alert(`${title}: ${message}`);
+        alert(${title}: ${message});
     }
 
     newPost();

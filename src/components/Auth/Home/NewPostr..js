@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Auth, API, Storage } from 'aws-amplify';
 
 const NewPost = (PostState, access_tk) => {
+
     const newPostData = PostState;
     const access_token = access_tk;
 
@@ -31,11 +32,8 @@ const NewPost = (PostState, access_tk) => {
             }
 
             alert('Post published successfully!');
-            window.location.reload();
-
         } catch (error) {
-            alert(`Error: An error occurred while publishing the post: ${error.message}`);
-            window.location.reload();
+            showAlert('Error', `An error occurred while publishing the post: ${error.message}`);
         }
     }
 

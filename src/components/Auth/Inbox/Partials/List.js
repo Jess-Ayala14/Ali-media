@@ -13,7 +13,7 @@ store.setState("BusinessId", [null]);
 export const List = (data) => {
     const loginFB = data['dataFromParent'][0];
     const ACCESS_TOKEN = data['dataFromParent'][1];
-    const APICALLFB = "me?fields=conversations{id,messages{message,from},participants},business";
+    const APICALLFB = "me?fields=conversations{id,messages{message,from},participants,unread_count},business";
     const [Conversations, setConversations] = store.useState("Conversations");
     const [BusinessId, setBusinessId] = store.useState("BusinessId");
     //const [sendMessage,setFormData]=useState(initialMessageState);
@@ -26,6 +26,14 @@ export const List = (data) => {
 
     }, [ACCESS_TOKEN]);
 
+
+    function getAbbreviation(name) {
+        if (!name) return ""; // Si no hay nombre, devolver cadena vacía
+        const words = name.split(" ");
+        const initials = words.map(word => word.charAt(0).toUpperCase());
+        return initials.join(" "); // Une las iniciales sin espacios
+    }
+
     function allConversations() {
         window.FB.api(
             APICALLFB,
@@ -37,7 +45,7 @@ export const List = (data) => {
                 // Insert your code here
                 //console.log(response);
                 setConversations(format(getConversation(response)));
-                console.log(setBusinessId(getBusinessId(response)));
+                setBusinessId(getBusinessId(response));
             }
 
         );
@@ -52,7 +60,13 @@ export const List = (data) => {
 
             const content = Object.keys(conversations).map(key => {
                 return (
-                    [conversations[key].id, conversations[key].messages['data'], conversations[key].participants['data'][0]['name']]
+                    [
+                        conversations[key].id != null ? conversations[key].id : null,
+                        conversations[key].messages != null ? conversations[key].messages['data'] : null,
+                        conversations[key].participants != null ? conversations[key].participants['data'][0]['name'] : null,
+                        conversations[key].unread_count != null ? conversations[key].unread_count : null,
+                        conversations[key].participants != null ? conversations[key].participants['data'][0]['id'] : null,
+                    ]
                 );
 
             })
@@ -81,9 +95,15 @@ export const List = (data) => {
                 <>
                     {
                         conversation != null &&
-                        <Nav.Item>
-                            <Nav.Link className='text-left' eventKey={conversation[0]}><h8>{conversation[2]}</h8></Nav.Link>
-                        </Nav.Item>
+                        <>
+                            <Nav.Item className='md-lg'>
+                                <Nav.Link className='text-left' eventKey={conversation[0]}><h8>{conversation[2]}<b>{"  " + conversation[3]}</b></h8></Nav.Link>
+                            </Nav.Item>
+
+                            <Nav.Item className='xs-sm'>
+                                <Nav.Link className='text-left' eventKey={conversation[0]}><h8>{getAbbreviation(conversation[2])}<b>{"  " + conversation[3]}</b></h8></Nav.Link>
+                            </Nav.Item>
+                        </>
                     }
                 </>
 
@@ -127,15 +147,23 @@ export const List = (data) => {
                     <Tab.Container className="text-left">
                         <Container className='container-message'>
                             <Row className='row-80'>
-                                {conversation[1].map((key) =>
-                                    key['message'] != "" &&
+                                {conversation[1] != null ?
+                                    conversation[1].map((key) =>
+                                        key['message'] != "" &&
+                                        <Card>
+                                            <Card.Body>
+                                                <b>{key['from']['name'] + ": "}</b><h8>{key['message']}</h8>
+                                                <br /><br />
+                                            </Card.Body>
+                                        </Card>
+                                    ).reverse()
+                                    :
                                     <Card>
                                         <Card.Body>
-                                            <b>{key['from']['name'] + ": "}</b><h8>{key['message']}</h8>
-                                            <br /><br />
+                                            <b>No messages</b>
                                         </Card.Body>
                                     </Card>
-                                ).reverse()}
+                                }
                             </Row>
                             <Row className='row-20'>
                                 <Card>
@@ -148,12 +176,9 @@ export const List = (data) => {
                                                     aria-describedby="basic-addon2"
                                                     onChange={setFormData1({...messageData,'text': e.target.value})}*/
                                                 />
-                                                <Form.Label><i>Available soon</i></Form.Label>
+                                                <Form.Label>Please write a message</Form.Label>
                                             </Form>
-                                            <Button variant="secondary"
-                                                id="" onClick={() => { /*tryToSend(); */ }}
-                                                title='Available soon'
-                                            >
+                                            <Button variant="outline-secondary" id="button-addon2" onClick={() => { /*tryToSend(); */ }}>
                                                 Send
                                             </Button>
                                         </InputGroup>
@@ -171,15 +196,13 @@ export const List = (data) => {
             <>
                 <Tab.Pane eventKey="main">
                     <Tab.Container className="text-center">
-                        <Container>
-                            <Row>
-                                <Col md={2} />
-                                <Col md={8}>
-                                    <Row>
-                                        <h4>No Chat Selected</h4>
-                                    </Row>
+                        <Container className="container-message">
+                            <br />
+                            <Row className='Row-80'>
+                                <Col xs={3} sm={3} md={2} lg={2} />
+                                <Col md={8} className='text-center'>
+                                    <h4>No Chat Selected</h4>
                                 </Col>
-                                <Col md={2} />
                             </Row>
                         </Container>
                     </Tab.Container>
@@ -193,24 +216,26 @@ export const List = (data) => {
         <>
             {loginFB == true
                 ?
-                <>
-                    <Col xs={3} md={3} lg={2}>
-                        <Nav variant="pills" className="flex-column">
-                            <GetConversations data={{ conversation: Conversations, business: BusinessId }} />
-                        </Nav>
-                    </Col>
-                    <Col className="Inbox-col-tab" xs={0} sm={9} md={9} lg={8}>
-                        <Row className='messages-content'>
-                            <Row className='card-insingt'>
-                                {<TabConversation conversations={Conversations} />}
+                <Row>
+                    
+                        <Col xs={4} sm={4} md={2} lg={2}>
+                            <Nav variant="pills" className="flex-column">
+                                <GetConversations data={{ conversation: Conversations, business: BusinessId }} />
+                            </Nav>
+                        </Col>
+                        <Col className="Inbox-col-tab" xs={8} sm={8} md={9} lg={9}>
+                            <Row className='messages-content'>
+                                <Row className='card-insingt'>
+                                    {<TabConversation conversations={Conversations} />}
+                                </Row>
                             </Row>
-                        </Row>
-                    </Col>
-                </>
+                        </Col>
+                    
+                </Row>
                 :
                 <>
                     <Col xs={7} md={3} lg={2} />
-                    <Col className="Inbox-col-tab" xs={0} sm={9} md={9} lg={8}>
+                    <Col className="Inbox-col-tab" xs={8} sm={8} md={9} lg={9}>
                         <Row className='messages-content'>
                             <Row className="card-insight">
                                 <Col xs={1} md={3} lg={4} />

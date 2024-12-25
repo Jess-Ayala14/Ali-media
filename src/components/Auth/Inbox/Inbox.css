@@ -97,3 +97,33 @@ div.Inbox .messages .nav-item a.nav-link {
 .container-message .row-20 {
     flex: 0 0 15vh;
 }
+
+
+/* Clase para mostrar en tamaños MD a LG */
+.nav-item.md-lg {
+    display: block; /* Mostrar el contenido */
+}
+
+@media (max-width: 991px) { /* MD y menores */
+    .nav-item.md-lg {
+        display: none; /* Ocultar en XS y SM */
+    }
+}
+
+/* Clase para mostrar en tamaños XS a SM */
+.nav-item.xs-sm {
+    display: none; /* Ocultar el contenido por defecto */
+}
+
+.nav-item.xs-sm a.nav-link {
+    border-radius: 22px; /* Ajusta el valor según el nivel de redondeo que prefieras */
+    margin-right: 25px; /* Opcional: añade algo de espacio interno */
+   /* background-color: #f0f0f0; /* Opcional: color de fondo para resaltar */
+    border: 1px solid #ddd; /* Opcional: borde para dar un efecto visual */
+}
+
+@media (max-width: 767px) { /* XS y SM */
+    .nav-item.xs-sm {
+        display: block; /* Mostrar en XS y SM */
+    }
+}

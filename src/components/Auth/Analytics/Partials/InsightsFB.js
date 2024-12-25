@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Button } from 'react-bootstrap';
+import { Nav, Row, Col, Card, Button } from 'react-bootstrap';
 
 import { createStore } from 'state-pool';
 
@@ -27,31 +27,6 @@ export const InsightsFB = (data) => {
 
     }, [ACCESS_TOKEN]);
 
-    /*
-     me/insights?metric=page_total_actions
-     me/insights/page_total_actions/day
-     me/insights/page_total_actions/days_28
-     me/insights/page_total_actions/week
-
-    
-        FB 20749883427147142074988342714714
-        Inst 17841406287465765
-        page_engaged_users
-        page_post_engagements
-        page_impressions
-        page_posts_impressions
-
-        me/insights?metric=page_engaged_users,page_impressions,page_post_engagements,page_posts_impressions
-
-        17841406287465765/insights?metric=impressions,reach,profile_views&period=day
-
-        me?fields=instagram_business_account{media{id,permalink}}
-       
-        post
-        17894903435627997/insights?metric=engagement,impressions,reach
-
-    */
-
     function allInsights() {
         window.FB.api(
             APICALLFB,
@@ -60,226 +35,143 @@ export const InsightsFB = (data) => {
                 access_token: ACCESS_TOKEN
             },
             function (response) {
-                // Insert your code here
-                // console.log(response);
                 setAnalytics(formatFB(getAnalyticsFB(response)));
                 setdayAnalytics(formatday(getAnalyticsFB(response)));
                 setweekAnalytics(formatweek(getAnalyticsFB(response)));
                 setmonthAnalytics(formatmonth(getAnalyticsFB(response)));
             }
-
         );
 
         function getAnalyticsFB(response) {
-
-            var insight = response['data']
-            return insight
+            return response['data'];
         }
 
         function formatFB(insights) {
-
             const content = Object.keys(insights).map(key => {
+                if (insights[key].values && insights[key].values.length > 0) {
+                    return [
+                        insights[key].name || null,
+                        insights[key].values || null,
+                        insights[key].title || null,
+                        insights[key].period || null,
+                        insights[key].description || null
+                    ];
+                }
+            }).filter(item => item !== undefined); // Filtra los elementos undefined
 
-
-                return (
-                    [insights[key].name, insights[key].values, insights[key].title, insights[key].period, insights[key].description]
-                );
-
-            })
-            //console.log(content)
-            return content
+            return content;
         }
 
         function formatday(insights) {
-
-            var content = Object.keys(insights).map(key => {
-
-                if (insights[key].period === "day") {
-
-                    return new Array(insights[key].name, insights[key].values[1]['value'], insights[key].period)
-
+            const content = Object.keys(insights).map(key => {
+                if (insights[key].period === "day" && insights[key].values && insights[key].values.length > 0) {
+                    return [
+                        insights[key].name || null,
+                        insights[key].values[1] && insights[key].values[1]['value'] || null,
+                        insights[key].period || null
+                    ];
                 }
+            }).filter(item => item !== undefined); // Filtra los elementos undefined
 
-            })
+            // Se crea la estructura de datos esperada, solo si hay elementos válidos
+            const dataDay = content.length > 0 ? [
+                content.map((data) => data[0]),
+                content.map((data) => data[1])
+            ] : []; // Asegura que 'dataDay' no tenga datos vacíos
 
-            var filtered = content.filter(function (x) {
-                return x !== undefined;
-            });
-
-
-            var dataDay = new Array(filtered.map((data) => data[0]), filtered.map((data) => data[1]))
-
-            //console.log(dataDay)
-            return dataDay
+            return dataDay;
         }
 
         function formatweek(insights) {
-
-            //console.log(insights)
             const content = Object.keys(insights).map(key => {
-                if (insights[key].period === "week") {
-
-                    return (
-                        [insights[key].name, insights[key].values, insights[key].period]
-                    );
+                if (insights[key].period === "week" && insights[key].values && insights[key].values.length > 0) {
+                    return [
+                        insights[key].name || null,
+                        insights[key].values || null,
+                        insights[key].period || null
+                    ];
                 }
-            })
+            }).filter(item => item !== undefined); // Filtra los elementos undefined
 
-            var filtered = content.filter(function (x) {
-                return x !== undefined;
-            });
-
-            //console.log(filtered)
-            return filtered
+            return content;
         }
 
         function formatmonth(insights) {
-
-            //console.log(insights)
             const content = Object.keys(insights).map(key => {
-                if (insights[key].period === "days_28") {
-
-                    return (
-                        [insights[key].name, insights[key].values, insights[key].period]
-                    );
+                if (insights[key].period === "days_28" && insights[key].values && insights[key].values.length > 0) {
+                    return [
+                        insights[key].name || null,
+                        insights[key].values || null,
+                        insights[key].period || null
+                    ];
                 }
-            })
+            }).filter(item => item !== undefined); // Filtra los elementos undefined
 
-            var filtered = content.filter(function (x) {
-                return x !== undefined;
-            });
-
-            //console.log(filtered)
-            return filtered
+            return content;
         }
-
     }
 
-
     function GetAnalyticsFB(props) {
-
-        //console.log(props)
-
         const FBinsights = props.analytics;
-        const listItems = FBinsights.map((insight) =>
-            <>
+        const listItems = FBinsights.map((insight, index) => (
+            <React.Fragment key={index}>
                 <br />
-                <Card className='card-insightFB'>
-                    <Card.Title className='text-left'>{insight[0]}</Card.Title>
-                    <Card.Body>
-                        <Card.Text>
-                            <p className='text-left'>{insight[1][0].value},  <b>{' date: '}</b>  {insight[1][0].end_time}</p>
-                            <p className='text-left'>{insight[1][1].value}, <b>{' date: '}</b> {insight[1][1].end_time}</p>
+                {insight[0] != null &&
+                    <Card className='card-insightFB'>
+                        <Card.Title className='text-left'>{insight[0]}</Card.Title>
+                        <Card.Body>
+                            <Card.Text>
+                                <p className='text-left'>{insight[1][0] != null ? insight[1][0].value : 'No data'},  <b>{' date: '}</b> {insight[1][0] != null ? insight[1][0].end_time : 'no data'}</p>
+                                <p className='text-left'>{insight[1][1] != null ? insight[1][1].value : 'No data'},  <b>{' date: '}</b> {insight[1][1] != null ? insight[1][1].end_time : 'no data'}</p>
 
-                            <div>
-                                <p className='text-left'>{insight[2]}  <b>{'  Period: '}</b>  {insight[3]}</p>
-                                <p className='little-text text-justify'>{insight[4]}</p>
-                            </div>
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
-            </>
-        );
+                                <div>
+                                    <p className='text-left'>{insight[2]}  <b>{'  Period: '}</b>  {insight[3]}</p>
+                                    <p className='little-text text-justify'>{insight[4]}</p>
+                                </div>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                }
+            </React.Fragment>
+        ));
 
         return (
             <ul>{listItems}</ul>
         );
-
     }
-
-    /////////////////////chart.js/////////////////////////////////////////////////////////////////////
-    const Data = [
-        {
-            id: 1,
-            year: '2016',
-            userGain: 80000,
-            userLost: 823
-        },
-        {
-            id: 2,
-            year: '2017',
-            userGain: 45677,
-            userLost: 345
-        },
-        {
-            id: 3,
-            year: '2018',
-            userGain: 78888,
-            userLost: 555
-        },
-        {
-            id: 4,
-            year: '2019',
-            userGain: 90000,
-            userLost: 4555
-        },
-        {
-            id: 5,
-            year: '2020',
-            userGain: 4300,
-            userLost: 234
-        }
-    ];
-
-    const froots = new Array('Piña', 'Sandia', 'Melon', 'Coco', 'Fresa', 'Mango');
-    const num_froots = [1, 2, 5, 4, 20, 15];
-    //const day_labels = ["page_engaged_users", "page_impressions", "page_post_engagements", "page_posts_impressions"]
-    // const day_num = [0, 9, 0, 8]
-
-    const [chartData, setChartData] = useState({
-        labels: dayAnlyticsFB[0],
-        datasets: [
-            {
-                label: "Users Gained ",
-                data: dayAnlyticsFB[1],
-                backgroundColor: [
-                    "rgba(75,192,192,1)",
-                    "#50AF95",
-                    "#AF5095",
-                    "#baf32f",
-                    "#2a71d0"
-                ],
-                borderColor: "black",
-                borderWidth: 2
-            }
-        ]
-    });
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     return (
         <>
-            {loginFB == true
-                ?
-                <Row>
-                    <Col xs={1} md={2} lg={4} />
-                    <Col xs={10} md={8} lg={4}>
-                        {<GetAnalyticsFB analytics={analyticsFB} />}
-                    </Col>
-                    <Col xs={1} md={2} lg={4} />
-                </Row>
-                :
-                <Row className="card-insight">
-                    <Col xs={1} md={3} lg={4} />
-                    <Col xs={10} md={6} lg={4}>
-                        <br />
-                        <Card className="card-insightFB">
-                            <Card.Body className='text-center'>
-                                <Card.Text>
-                                    Please Authorize Facebook
-                                </Card.Text>
-                                <Button href='/Settings' className="btn-instagram">Go to settings</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col xs={1} md={3} lg={4} />
-                </Row>
+            {loginFB === true
+                ? (
+                    <Row>
+                        <Col xs={1} md={2} lg={4}/>
+                        <Col xs={10} md={8} lg={4}>
+                            {<GetAnalyticsFB analytics={analyticsFB} />}
+                        </Col>
+                        <Col xs={1} md={2} lg={8} />
+                    </Row>
+                )
+                : (
+                    <Row className="card-insight">
+                        <Col xs={1} md={3} lg={4} />
+                        <Col xs={10} md={6} lg={4}>
+                            <br />
+                            <Card className="card-insightFB">
+                                <Card.Body className='text-center'>
+                                    <Card.Text>
+                                        Please Authorize Facebook
+                                    </Card.Text>
+                                    <Button href='/Settings' className="btn-instagram">Go to settings</Button>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col xs={1} md={3} lg={4} />
+                    </Row>
+                )
             }
         </>
     );
-
 }
 
 export default InsightsFB;

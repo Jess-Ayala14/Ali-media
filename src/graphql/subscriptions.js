@@ -2,11 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateBusiness = /* GraphQL */ `
-  subscription OnCreateBusiness(
-    $filter: ModelSubscriptionBusinessFilterInput
-    $owner: String
-  ) {
-    onCreateBusiness(filter: $filter, owner: $owner) {
+  subscription OnCreateBusiness($owner: String) {
+    onCreateBusiness(owner: $owner) {
       id
       name
       about
@@ -15,9 +12,17 @@ export const onCreateBusiness = /* GraphQL */ `
       image
       website
       multiposts {
-        nextToken
-      }
-      analytics {
+        items {
+          id
+          title
+          fb_id
+          inst_id
+          twit_id
+          createdAt
+          updatedAt
+          businessMultipostsId
+          owner
+        }
         nextToken
       }
       createdAt
@@ -27,11 +32,8 @@ export const onCreateBusiness = /* GraphQL */ `
   }
 `;
 export const onUpdateBusiness = /* GraphQL */ `
-  subscription OnUpdateBusiness(
-    $filter: ModelSubscriptionBusinessFilterInput
-    $owner: String
-  ) {
-    onUpdateBusiness(filter: $filter, owner: $owner) {
+  subscription OnUpdateBusiness($owner: String) {
+    onUpdateBusiness(owner: $owner) {
       id
       name
       about
@@ -40,9 +42,17 @@ export const onUpdateBusiness = /* GraphQL */ `
       image
       website
       multiposts {
-        nextToken
-      }
-      analytics {
+        items {
+          id
+          title
+          fb_id
+          inst_id
+          twit_id
+          createdAt
+          updatedAt
+          businessMultipostsId
+          owner
+        }
         nextToken
       }
       createdAt
@@ -52,11 +62,8 @@ export const onUpdateBusiness = /* GraphQL */ `
   }
 `;
 export const onDeleteBusiness = /* GraphQL */ `
-  subscription OnDeleteBusiness(
-    $filter: ModelSubscriptionBusinessFilterInput
-    $owner: String
-  ) {
-    onDeleteBusiness(filter: $filter, owner: $owner) {
+  subscription OnDeleteBusiness($owner: String) {
+    onDeleteBusiness(owner: $owner) {
       id
       name
       about
@@ -65,9 +72,17 @@ export const onDeleteBusiness = /* GraphQL */ `
       image
       website
       multiposts {
-        nextToken
-      }
-      analytics {
+        items {
+          id
+          title
+          fb_id
+          inst_id
+          twit_id
+          createdAt
+          updatedAt
+          businessMultipostsId
+          owner
+        }
         nextToken
       }
       createdAt
@@ -77,11 +92,8 @@ export const onDeleteBusiness = /* GraphQL */ `
   }
 `;
 export const onCreateMultiposts = /* GraphQL */ `
-  subscription OnCreateMultiposts(
-    $filter: ModelSubscriptionMultipostsFilterInput
-    $owner: String
-  ) {
-    onCreateMultiposts(filter: $filter, owner: $owner) {
+  subscription OnCreateMultiposts($owner: String) {
+    onCreateMultiposts(owner: $owner) {
       id
       title
       fb_id
@@ -95,11 +107,8 @@ export const onCreateMultiposts = /* GraphQL */ `
   }
 `;
 export const onUpdateMultiposts = /* GraphQL */ `
-  subscription OnUpdateMultiposts(
-    $filter: ModelSubscriptionMultipostsFilterInput
-    $owner: String
-  ) {
-    onUpdateMultiposts(filter: $filter, owner: $owner) {
+  subscription OnUpdateMultiposts($owner: String) {
+    onUpdateMultiposts(owner: $owner) {
       id
       title
       fb_id
@@ -113,11 +122,8 @@ export const onUpdateMultiposts = /* GraphQL */ `
   }
 `;
 export const onDeleteMultiposts = /* GraphQL */ `
-  subscription OnDeleteMultiposts(
-    $filter: ModelSubscriptionMultipostsFilterInput
-    $owner: String
-  ) {
-    onDeleteMultiposts(filter: $filter, owner: $owner) {
+  subscription OnDeleteMultiposts($owner: String) {
+    onDeleteMultiposts(owner: $owner) {
       id
       title
       fb_id
@@ -126,63 +132,6 @@ export const onDeleteMultiposts = /* GraphQL */ `
       createdAt
       updatedAt
       businessMultipostsId
-      owner
-    }
-  }
-`;
-export const onCreateAnalytics = /* GraphQL */ `
-  subscription OnCreateAnalytics(
-    $filter: ModelSubscriptionAnalyticsFilterInput
-    $owner: String
-  ) {
-    onCreateAnalytics(filter: $filter, owner: $owner) {
-      id
-      rate_weekFB
-      rate_monthFB
-      rate_weekIns
-      rate_monthIns
-      date_generated
-      createdAt
-      updatedAt
-      businessAnalyticsId
-      owner
-    }
-  }
-`;
-export const onUpdateAnalytics = /* GraphQL */ `
-  subscription OnUpdateAnalytics(
-    $filter: ModelSubscriptionAnalyticsFilterInput
-    $owner: String
-  ) {
-    onUpdateAnalytics(filter: $filter, owner: $owner) {
-      id
-      rate_weekFB
-      rate_monthFB
-      rate_weekIns
-      rate_monthIns
-      date_generated
-      createdAt
-      updatedAt
-      businessAnalyticsId
-      owner
-    }
-  }
-`;
-export const onDeleteAnalytics = /* GraphQL */ `
-  subscription OnDeleteAnalytics(
-    $filter: ModelSubscriptionAnalyticsFilterInput
-    $owner: String
-  ) {
-    onDeleteAnalytics(filter: $filter, owner: $owner) {
-      id
-      rate_weekFB
-      rate_monthFB
-      rate_weekIns
-      rate_monthIns
-      date_generated
-      createdAt
-      updatedAt
-      businessAnalyticsId
       owner
     }
   }

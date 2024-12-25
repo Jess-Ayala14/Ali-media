@@ -15,9 +15,17 @@ export const createBusiness = /* GraphQL */ `
       image
       website
       multiposts {
-        nextToken
-      }
-      analytics {
+        items {
+          id
+          title
+          fb_id
+          inst_id
+          twit_id
+          createdAt
+          updatedAt
+          businessMultipostsId
+          owner
+        }
         nextToken
       }
       createdAt
@@ -40,9 +48,17 @@ export const updateBusiness = /* GraphQL */ `
       image
       website
       multiposts {
-        nextToken
-      }
-      analytics {
+        items {
+          id
+          title
+          fb_id
+          inst_id
+          twit_id
+          createdAt
+          updatedAt
+          businessMultipostsId
+          owner
+        }
         nextToken
       }
       createdAt
@@ -65,9 +81,17 @@ export const deleteBusiness = /* GraphQL */ `
       image
       website
       multiposts {
-        nextToken
-      }
-      analytics {
+        items {
+          id
+          title
+          fb_id
+          inst_id
+          twit_id
+          createdAt
+          updatedAt
+          businessMultipostsId
+          owner
+        }
         nextToken
       }
       createdAt
@@ -126,63 +150,6 @@ export const deleteMultiposts = /* GraphQL */ `
       createdAt
       updatedAt
       businessMultipostsId
-      owner
-    }
-  }
-`;
-export const createAnalytics = /* GraphQL */ `
-  mutation CreateAnalytics(
-    $input: CreateAnalyticsInput!
-    $condition: ModelAnalyticsConditionInput
-  ) {
-    createAnalytics(input: $input, condition: $condition) {
-      id
-      rate_weekFB
-      rate_monthFB
-      rate_weekIns
-      rate_monthIns
-      date_generated
-      createdAt
-      updatedAt
-      businessAnalyticsId
-      owner
-    }
-  }
-`;
-export const updateAnalytics = /* GraphQL */ `
-  mutation UpdateAnalytics(
-    $input: UpdateAnalyticsInput!
-    $condition: ModelAnalyticsConditionInput
-  ) {
-    updateAnalytics(input: $input, condition: $condition) {
-      id
-      rate_weekFB
-      rate_monthFB
-      rate_weekIns
-      rate_monthIns
-      date_generated
-      createdAt
-      updatedAt
-      businessAnalyticsId
-      owner
-    }
-  }
-`;
-export const deleteAnalytics = /* GraphQL */ `
-  mutation DeleteAnalytics(
-    $input: DeleteAnalyticsInput!
-    $condition: ModelAnalyticsConditionInput
-  ) {
-    deleteAnalytics(input: $input, condition: $condition) {
-      id
-      rate_weekFB
-      rate_monthFB
-      rate_weekIns
-      rate_monthIns
-      date_generated
-      createdAt
-      updatedAt
-      businessAnalyticsId
       owner
     }
   }

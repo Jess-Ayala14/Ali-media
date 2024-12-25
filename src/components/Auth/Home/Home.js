@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { createElement, useRef, useEffect, useState } from 'react';
 import Files from './Partials/Files';
 import Posted from './Partials/Posted';
 import Drafts from './Partials/Drafts';
 import { Auth, API, Storage } from 'aws-amplify';
 import { Loader } from '@aws-amplify/ui-react';
-import { Container, Row, Col, Tab, Button, Modal, Nav, Form, Card, Pagination }
+import { Container, Row, Col, Tab, Button, Modal, Offcanvas, Nav, Form, Card, Pagination, Label }
     from 'react-bootstrap';
 import './Home.css';
 import { listBusinesses } from '../../../graphql/queries';
@@ -15,9 +15,6 @@ import NewPost from './Partials/NewPost';
 import ModalPost from './Partials/ModalPost';
 import ModalLoading from './Partials/ModalLoading';
 import loadimg from '../../../storage/loader.gif';
-import "@aws-amplify/ui-react/styles.css";
-
-
 const store = createStore();
 store.setState("token", '');
 
@@ -144,7 +141,7 @@ const Home = () => {
                 appId: "801174264382809",
                 cookie: true,
                 xfbml: true,
-                version: 'v18.0'
+                version: 'v15.0'
             });
 
             window.FB.getLoginStatus(function (response) {
@@ -243,7 +240,7 @@ const Home = () => {
     //e => setFormData1({ ...newPostData, 'description': e.target.value })}
     const onImageChange = (e) => {
 
-        console.log("Im inside");
+        //console.log("Im inside");
 
         const ImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
         const videoTypes = ['video/mp4', 'video/mkv'];
@@ -258,7 +255,7 @@ const Home = () => {
                 setefileActive(false)
             }
             else {
-                console.log("invalid File 1")
+               // console.log("invalid File 1")
                 seteImgActive(true)
             }
         }
@@ -270,12 +267,12 @@ const Home = () => {
                 setefileActive(false)
             }
             else {
-                console.log("invalid File 2")
+                //console.log("invalid File 2")
                 seteVideoActive(true)
             }
         }
         else {
-            console.log("File no Valid")
+           // console.log("File no Valid")
             setefileActive(true)
         }
         console.log(e.target.files[0].size)

@@ -26,7 +26,7 @@ export default class Policy extends Component {
                     <Row>
                         <Col md={2} />
                         <Col md={8} className="policy-content">
-                            <iframe src="https://reactamplifyworks3feb142445-master.s3.amazonaws.com/public/termly.html" width='102%' height='100%' />
+                            <iframe src="https://reactamplifyworks3feb142445-master.s3.us-east-1.amazonaws.com/public/termly.html" width='102%' height='100%' />
                         </Col>
                         <Col md={2} />
                     </Row>

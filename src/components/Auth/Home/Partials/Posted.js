@@ -190,7 +190,7 @@ export const Posted = (data) => {
                         </Card.Footer>
                     </Card>
                 </Col>
-                <Col xs={0} sm={1} md={2} lg={2} />
+                <Col xs={0} sm={2} md={2} lg={2} />
             </Row>
         );
 
@@ -292,33 +292,42 @@ export const Posted = (data) => {
                                 }
                             </Tab.Pane>
                             <Tab.Pane eventKey="instagram-posted">
-                                {loginFB === true
-                                    ?
+                                {loginFB === true && InsPosted.length > 0 ? (
                                     <Row>
                                         <br />
                                         <InsPost posted={InsPosted} />
                                     </Row>
-                                    :
+                                ) : (
                                     <Row>
-                                        <Col className="center">
-                                            <Row>
-                                                <br />
-                                                <Col xs={2} md={3} lg={3} />
-                                                <Col xs={8} md={6} lg={6}>
-                                                    <br />
+                                        <br />
+                                        <Col xs={2} md={3} lg={3} />
+                                        <Col xs={8} md={6} lg={6}>
+                                            <br />
+                                            <Col className="center">
+                                                {loginFB === true ? (
                                                     <Card className="inst">
                                                         <Card.Body className='text-center'>
                                                             <Card.Text>
-                                                                Please Authorize Instagram
+                                                                Instagram not accessed
                                                             </Card.Text>
                                                             <Button href='/Settings' className="btn-instagram">Go to settings</Button>
                                                         </Card.Body>
                                                     </Card>
-                                                </Col>
-                                                <Col xs={2} md={3} lg={3} />
-                                            </Row>                            </Col>
+                                                ) : (
+                                                    <Card>
+                                                        <Card.Body className='text-center'>
+                                                            <Card.Text>
+                                                                Please login to Facebook
+                                                            </Card.Text>
+                                                            <Button href='/Settings' variant="primary">Go to settings</Button>
+                                                        </Card.Body>
+                                                    </Card>
+                                                )}
+                                            </Col>
+                                        </Col>
+                                        <Col xs={2} md={3} lg={3} />
                                     </Row>
-                                }
+                                )}
                             </Tab.Pane>
                             <Tab.Pane eventKey="twitter-posted">
                                 <br />

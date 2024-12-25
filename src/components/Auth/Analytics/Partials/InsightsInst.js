@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {Row, Col, Card, Button } from 'react-bootstrap';
+import { Nav, Row, Col, Card, Button } from 'react-bootstrap';
 import { createStore } from 'state-pool';
 
 const store = createStore();
@@ -87,7 +87,12 @@ export const InsightsInst = (data) => {
 
             const content = Object.keys(insights).map(key => {
                 return (
-                    [insights[key].name, insights[key].period, insights[key].values, insights[key].title, insights[key].description]
+                    [
+                        insights[key].name != null ? insights[key].name : null,
+                        insights[key].period != null ? insights[key].period : null,
+                        insights[key].values != null ? insights[key].values : null,
+                        insights[key].title != null ? insights[key].title : null,
+                        insights[key].description != null ? insights[key].description : null]
                 );
             })
 
@@ -101,20 +106,22 @@ export const InsightsInst = (data) => {
         const listItems = FBinsights.map((insight) =>
             <>
                 <br />
-                <Card className='card-insightInst'>
-                    <Card.Title className='text-left'>{insight[0]}</Card.Title>
-                    <Card.Body>
-                        <Card.Text>
-                            <p className='text-justify'>{insight[2][0].value}, <b>{' date: '}</b> {insight[2][0].end_time} </p>
-                            <p className='text-justify'>{insight[2][1].value}, <b>{' date: '}</b> {insight[2][1].end_time}</p>
+                {insight[0] != null &&
+                    <Card className='card-insightInst'>
+                        <Card.Title className='text-left'>{insight[0]}</Card.Title>
+                        <Card.Body>
+                            <Card.Text>
+                                <p className='text-justify'>{insight[2][0] != null ? insight[2][0].value : 'no data'}, <b>{' date: '}</b> {insight[2][0] ? insight[2][0].end_time : 'no data'} </p>
+                                <p className='text-justify'>{insight[2][1] != null ? insight[2][1].value : 'no data'}, <b>{' date: '}</b> {insight[2][0] ? insight[2][1].end_time : 'no data'}</p>
 
-                            <div>
-                                <p className='text-left' >{insight[3]} <b> {' Period: '}</b> {insight[1]}</p>
-                                <p className='little-text text-justify'>{insight[4]}</p>
-                            </div>
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                                <div>
+                                    <p className='text-left' >{insight[3]} <b> {' Period: '}</b> {insight[1]}</p>
+                                    <p className='little-text text-justify'>{insight[4]}</p>
+                                </div>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                }
             </>
         );
 
@@ -131,11 +138,11 @@ export const InsightsInst = (data) => {
             {loginFB == true
                 ?
                 <Row>
-                    <Col xs={1} md={2} lg={4}/>
-                    <Col xs={10} md={8} lg={4}>
+                    <Col xs={1} md={3} lg={4} />
+                    <Col xs={10} md={6} lg={4}>
                         <GetAnalyticsInst analytics={analyticsInst} />
                     </Col>
-                    <Col xs={1} md={2} lg={4} />
+                    <Col xs={1} md={4} lg={8} />
                 </Row>
                 :
                 <Row className="card-insight">
