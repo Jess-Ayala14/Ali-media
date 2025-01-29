@@ -10,7 +10,7 @@ export const InsightsInst = (data) => {
     const loginFB = data['dataFromParent'][0];
     const ACCESS_TOKEN = data['dataFromParent'][1];
     const APICALLInst = 'me?fields=instagram_business_account{id}'
-    const APICALLInst1 = '/insights?metric=impressions,reach,profile_views&period=day'
+    const APICALLInst1 = '/insights?metric=impressions,reach&period=day,week,days_28'
     const [analyticsInst, setAnalytics] = store.useState("analyticsInst");
 
     useEffect(() => {

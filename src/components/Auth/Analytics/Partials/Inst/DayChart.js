@@ -7,7 +7,7 @@ export function Daychart(data) {
     const loginFB = data['dataFromParent'][0];
     const ACCESS_TOKEN = data['dataFromParent'][1];
     const APICALLInst = 'me?fields=instagram_business_account{id}'
-    const APICALLInst1 = '/insights?metric=impressions,reach,profile_views&period=day'
+    const APICALLInst1 = '/insights?metric=impressions,reach&period=day'
     const [dayAnalyticsInts, setDayAnalytics] = useState([]);
     const [loading, setLoading] = useState(true); // Indicador de carga de los datos
     const [error, setError] = useState(false); // Indicador de error en la carga de datos
