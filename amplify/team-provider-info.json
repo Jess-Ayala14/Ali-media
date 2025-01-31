@@ -10,14 +10,6 @@
       "StackName": "amplify-reactaws-master-142445",
       "StackId": "arn:aws:cloudformation:us-east-1:169186432930:stack/amplify-reactaws-master-142445/b20c2590-9b55-11ee-b6d1-0aa270bdd157",
       "AmplifyAppId": "d7kqn3faqss19"
-    },
-    "categories": {
-      "auth": {
-        "reactamplifyworkd0525dc4": {}
-      },
-      "storage": {
-        "ImageStorege": {}
-      }
     }
   }
 }
